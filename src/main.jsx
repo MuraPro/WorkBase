@@ -7,18 +7,13 @@ import { BrowserRouter } from 'react-router-dom';
 import { App } from './app';
 import { logger } from '@shared/lib/logger';
 import * as Sentry from '@sentry/react';
-import { createStore } from '@app/store/store';
-import { Provider } from 'react-redux';
 
-const store = createStore();
 logger.init();
 
 createRoot(document.getElementById('root')).render(
   <Sentry.ErrorBoundary fallback={<p>Что-то пошло не так</p>}>
-    <Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </Provider>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </Sentry.ErrorBoundary>
 );
