@@ -1,0 +1,62 @@
+[
+  {
+    "_id": "67rdca3eeb7f6fgeed471198",
+    "name": "Ответственность",
+    "color": "primary"
+  },
+  {
+    "_id": "67rdca3eeb7f6fgeed471100",
+    "name": "Внимание к деталям",
+    "color": "secondary"
+  },
+  {
+    "_id": "67rdca3eeb7f6fgeed4711012",
+    "name": "Коммуникация",
+    "color": "success"
+  },
+  {
+    "_id": "67rdca3eeb7f6fgeed471101",
+    "name": "Эмпатия",
+    "color": "danger"
+  },
+  {
+    "_id": "67rdca3eeb7f6fgeed471102",
+    "name": "Командная работа",
+    "color": "info"
+  },
+  {
+    "_id": "67rdca3eeb7f6fgeed471103",
+    "name": "Стрессоустойчивость",
+    "color": "dark"
+  },
+  {
+    "_id": "67rdca3eeb7f6fgeed471104",
+    "name": "Самоорганизация",
+    "color": "info"
+  },
+  {
+    "_id": "67rdca3eeb7f6fgeed471105",
+    "name": "Обучяемость",
+    "color": "primary"
+  },
+  {
+    "_id": "67rdca3eeb7f6fgeed471106",
+    "name": "Аналитическое мышление",
+    "color": "warning"
+  },
+  {
+    "_id": "67rdca3eeb7f6fgeed471107",
+    "name": "Креативность",
+    "color": "secondary"
+  },
+  {
+    "_id": "67rdca3eeb7f6fgeed471108",
+    "name": "Аккуратность",
+    "color": "success"
+  },
+  {
+    "_id": "67rdca3eeb7f6fgeed471109",
+    "name": "Оперативность",
+    "color": "danger"
+  }
+]

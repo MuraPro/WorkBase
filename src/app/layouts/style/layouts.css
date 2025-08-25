@@ -1,0 +1,17 @@
+@media (max-width: 480px) {
+  .responsive-center {
+    justify-content: center !important;
+  }
+}
+
+.site-header {
+  min-height: 80px;
+}
+.site-footer {
+  min-height: 80px;
+}
+
+.main-wrap {
+  min-height: calc(100vh - 80px - 80px);
+  display: block;
+}

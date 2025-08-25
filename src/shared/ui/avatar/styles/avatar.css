@@ -1,0 +1,26 @@
+.avatar-wrapper {
+  overflow: hidden;
+  border-radius: 50%;
+  position: relative;
+}
+
+.avatar-img {
+  transition: opacity 0.2s ease-in-out;
+}
+
+.avatar-img.fade-in {
+  opacity: 1;
+}
+
+.avatar-img.invisible {
+  opacity: 0;
+}
+
+.avatar-loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #f0f0f0;
+  border-radius: 50%;
+  z-index: 1;
+}

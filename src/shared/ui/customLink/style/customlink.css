@@ -1,0 +1,6 @@
+.custom-link {
+  color: black;
+  &:hover {
+    color: #f39c12;
+  }
+}

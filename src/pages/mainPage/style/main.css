@@ -1,0 +1,9 @@
+.custom-init-button {
+  width: auto;
+}
+
+@media (max-width: 480px) {
+  .custom-init-button {
+    width: 80%;
+  }
+}
