@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 import { validatorConfig } from '@shared/lib/errors';
 import { FormComponent } from '@shared/ui/formComponent';
 import { SelectField } from '@shared/ui/selectField';
@@ -9,7 +10,7 @@ import { RadioField } from '@shared/ui/radioField';
 import { MultiSelectField } from '@shared/ui/multiSelectField';
 import { CheckBoxField } from '@shared/ui/checkBoxField';
 import { transformToSelectOptions } from '../model/transformData';
-import { useQualities } from '../../quality/model/useQualityContext';
+import { getQualities } from '../../quality';
 import { useProfessions } from '../../profession/model/useProfessionContext';
 import { useAuth } from '../model/useAuthContext';
 
@@ -25,7 +26,7 @@ const RegisterForm = ({ toggleFormType }) => {
     licence: false,
   };
   const { signUp } = useAuth();
-  const { qualities } = useQualities();
+  const qualities = useSelector(getQualities());
   const qualitiesList = transformToSelectOptions(qualities);
 
   const { professions } = useProfessions();

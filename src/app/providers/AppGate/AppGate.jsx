@@ -1,14 +1,16 @@
 // src/app/providers/AppGate.jsx
 import { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 import { useAuth } from '@features/auth';
-import { useQualities } from '@features/quality';
+import { getQualitiesLoadingStatus } from '@features/quality';
 import { useProfessions } from '@features/profession';
 import { useGlobalLoading } from '@app/providers/LoadingProvider';
+getQualitiesLoadingStatus;
 
 export const AppGate = ({ children }) => {
   const { isLoading: isAuthLoading } = useAuth();
-  const { isLoading: isQualitiesLoading } = useQualities();
+  const isQualitiesLoading = useSelector(getQualitiesLoadingStatus());
   const { isLoading: isProfLoading } = useProfessions();
   const { setShow } = useGlobalLoading();
   const isBootLoading = isAuthLoading || isQualitiesLoading || isProfLoading;

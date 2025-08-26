@@ -1,11 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Quality from './quality';
-import { useQualities } from '../model/useQualityContext';
+import { QualityBadge } from '@shared/ui/quality';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  getQualitiesLoadingStatus,
+  getQualitiesByIds,
+  loadQualitiesList,
+} from '../slices/qualities';
 import { LoaderWave } from '@shared/ui/loaderWave';
 
 const QualitiesList = ({ qualities }) => {
-  const { isLoading } = useQualities();
+  const dispatch = useDispatch();
+  const isLoading = useSelector(getQualitiesLoadingStatus());
+  const qualitiesList = useSelector(getQualitiesByIds(qualities));
+
+  useEffect(() => {
+    dispatch(loadQualitiesList());
+  }, [dispatch]);
 
   if (!qualities?.length) return null;
 
@@ -13,9 +24,8 @@ const QualitiesList = ({ qualities }) => {
 
   return (
     <>
-      {qualities.map((qual) => {
-        const id = typeof qual === 'string' ? qual : qual._id;
-        return <Quality key={id} id={id} />;
+      {qualitiesList.map((qual) => {
+        return <QualityBadge key={qual._id} {...qual} />;
       })}
     </>
   );

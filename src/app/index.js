@@ -1,2 +1,3 @@
 import App from './App';
-export { App };
+import { createStore } from './store/store';
+export { App, createStore };

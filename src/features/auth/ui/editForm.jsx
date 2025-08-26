@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { FormComponent } from '@shared/ui/formComponent';
 import { BackHistoryButton } from '@shared/ui/BackHistoryButton';
@@ -10,7 +11,7 @@ import { MultiSelectField } from '@shared/ui/multiSelectField';
 import { Loader } from '@shared/ui/loader';
 import { validatorConfig } from '@shared/lib/errors';
 import { useProfessions } from '@features/profession';
-import { useQualities } from '@features/quality';
+import { getQualities, getQualitiesLoadingStatus } from '@features/quality';
 import { useAuth } from '@features/auth/model/useAuthContext';
 import {
   transformProfessions,
@@ -23,10 +24,11 @@ import { random } from 'lodash';
 const EditForm = () => {
   const [defaultData, setDefaultData] = useState(null);
   const { userId } = useParams();
-  const { currentUser, updateUserData } = useAuth();
+  const qualities = useSelector(getQualities());
+  const qualitiesLoading = useSelector(getQualitiesLoadingStatus());
 
+  const { currentUser, updateUserData } = useAuth();
   const { professions, isLoading: professionsLoading } = useProfessions();
-  const { qualities, isLoading: qualitiesLoading } = useQualities();
   const professionsList = transformProfessions(professions);
   const qualitiesList = transformQualities(qualities);
 

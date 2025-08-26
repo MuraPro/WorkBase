@@ -14,43 +14,41 @@ import { AuthProvider } from '@features/auth';
 import { AppGate } from './providers/AppGate/AppGate';
 import { UsersGate } from '@app/providers/UsersGate/UsersGate';
 import { LoadingProvider } from '@app/providers/LoadingProvider';
-import { CommentsProvider } from '@features/comments';
+import { AppLoader } from './providers/AppLoader';
 
 function App() {
   return (
-    <>
+    <AppLoader>
       <AuthProvider>
-        <QualitiesProvider>
-          <ProfessionProvider>
-            <LoadingProvider>
-              <AppGate>
-                <Routes>
-                  <Route path="/" element={<Layout />}>
-                    <Route index element={<MainPage />} />
-                    <Route path="login/:type?" element={<AuthPage />} />
-                    <Route
-                      path="users/*"
-                      element={
-                        <ProtectedRoute>
-                          <UserProvider>
-                            <UsersGate>
-                              <UsersRoutes />
-                            </UsersGate>
-                          </UserProvider>
-                        </ProtectedRoute>
-                      }
-                    />
-                    <Route path="/logout" element={<LogOutPage />} />
-                    <Route path="*" element={<Navigate to="/" replace />} />
-                  </Route>
-                </Routes>
-              </AppGate>
-            </LoadingProvider>
-          </ProfessionProvider>
-        </QualitiesProvider>
+        <ProfessionProvider>
+          <LoadingProvider>
+            <AppGate>
+              <Routes>
+                <Route path="/" element={<Layout />}>
+                  <Route index element={<MainPage />} />
+                  <Route path="login/:type?" element={<AuthPage />} />
+                  <Route
+                    path="users/*"
+                    element={
+                      <ProtectedRoute>
+                        <UserProvider>
+                          <UsersGate>
+                            <UsersRoutes />
+                          </UsersGate>
+                        </UserProvider>
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route path="/logout" element={<LogOutPage />} />
+                  <Route path="*" element={<Navigate to="/" replace />} />
+                </Route>
+              </Routes>
+            </AppGate>
+          </LoadingProvider>
+        </ProfessionProvider>
       </AuthProvider>
       <ToastContainer />
-    </>
+    </AppLoader>
   );
 }
 
