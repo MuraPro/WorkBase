@@ -1,13 +1,14 @@
 import { useState, useEffect, useCallback } from 'react';
 import { nanoid } from 'nanoid';
 import { useParams } from 'react-router-dom';
-import { useAuth } from '@features/auth';
 import commentService from '../api/comment.service';
 import { handleFirebaseError } from '@shared/lib/errors';
+import { useSelector } from 'react-redux';
+import { getCurrentUserData } from '@features/user';
 
 export function useCommentsMethods() {
   const { userId } = useParams();
-  const { currentUser } = useAuth();
+  const currentUser = useSelector(getCurrentUserData());
   const [isLoading, setLoading] = useState(true);
   const [comments, setComments] = useState([]);
 

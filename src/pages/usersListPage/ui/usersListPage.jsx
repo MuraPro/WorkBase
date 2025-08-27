@@ -7,25 +7,24 @@ import { Pagination } from '@shared/ui/pagination';
 import { Loader } from '@shared/ui/loader';
 import { SearchStatus } from '@shared/ui/searchStatus';
 import { ProfessionFilters } from '@entities/professionFilter';
-import { useUser } from '@features/user';
+import { getUsersList } from '@features/user';
 import { UserTable } from '@widgets/userTable';
 import _ from 'lodash';
-import { useAuth } from '@features/auth';
 import {
   getProfessions,
   getProfessionsLoadingStatus,
 } from '@features/profession';
+import { getCurrentUserData } from '@features/user';
 
 const UsersListPage = () => {
+  const currentUser = useSelector(getCurrentUserData());
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedProf, setSelectedProf] = useState();
   const [sortBy, setSortBy] = useState({ path: 'name', order: 'asc' });
   const [searchQuery, setSearchQuery] = useState('');
   const pageSize = 8;
 
-  const { users } = useUser();
-  const { currentUser } = useAuth();
-
+  const users = useSelector(getUsersList());
   const professions = useSelector(getProfessions());
   const professionsLoading = useSelector(getProfessionsLoadingStatus());
 

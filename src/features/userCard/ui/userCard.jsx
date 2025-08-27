@@ -3,12 +3,13 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { Avatar } from '@shared/ui/avatar';
 import UserInfo from './userInfo';
 import PropTypes from 'prop-types';
-import { useAuth } from '../../auth';
+import { useSelector } from 'react-redux';
+import { getCurrentUserData } from '@features/user';
 
 const UserCard = ({ user }) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { currentUser } = useAuth();
+  const currentUser = useSelector(getCurrentUserData());
 
   const handleClick = () => {
     navigate(location.pathname + '/edit');

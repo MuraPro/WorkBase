@@ -1,11 +1,13 @@
 import React from 'react';
 import { useParams, Navigate } from 'react-router-dom';
 import { EditUserPage } from '@pages/editUserPage';
-import { useAuth } from '@features/auth';
+import { useSelector } from 'react-redux';
+import { getCurrentUserData, getUsersLoadingStatus } from '@features/user';
 
 const EditPage = () => {
   const { userId } = useParams();
-  const { currentUser, isLoading } = useAuth();
+  const currentUser = useSelector(getCurrentUserData());
+  const isLoading = useSelector(getUsersLoadingStatus());
 
   if (isLoading) return null;
 

@@ -3,7 +3,7 @@ import professions from './mocks/professions.json';
 import qualities from './mocks/qualities.json';
 import users from './mocks/users.json';
 import httpService from '../api/httpService';
-import { generateAvatarUrl } from '@features/auth/model/generateAvatarUrl';
+import { generateAvatarUrl } from '@shared/lib/helpers/generateAvatarUrl';
 
 const useMockData = () => {
   const statusConsts = useMemo(

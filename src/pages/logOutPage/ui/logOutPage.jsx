@@ -1,12 +1,15 @@
 import React, { useEffect } from 'react';
-import { useAuth } from '@features/auth';
+import { logOut } from '@features/user';
 import { Loader } from '@shared/ui/loader';
+import { useNavigate } from 'react-router-dom';
 
 const LogOutPage = () => {
-  const { logOut } = useAuth();
+  const navigate = useNavigate();
+
   useEffect(() => {
     logOut();
-  }, [logOut]);
+    navigate('/', { replace: true });
+  }, [navigate]);
   return <Loader />;
 };
 

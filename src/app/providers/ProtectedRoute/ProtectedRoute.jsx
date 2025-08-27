@@ -1,10 +1,11 @@
 import React from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { useAuth } from '@features/auth';
+import { useSelector } from 'react-redux';
+import { getCurrentUserData } from '@features/user';
 
 const ProtectedRoute = ({ children }) => {
-  const { currentUser } = useAuth();
+  const currentUser = useSelector(getCurrentUserData());
   const location = useLocation();
 
   if (!currentUser) {

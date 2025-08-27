@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
 import { Avatar } from '@shared/ui/avatar';
-import { LoaderWave } from '@shared/ui/loaderWave';
 import { displayDate } from '@shared/lib/date';
-import { useUser } from '@features/user';
-import { useAuth } from '@features/auth';
+import { getUserById } from '@features/user';
+import { getCurrentUserData } from '@features/user';
+import { useSelector } from 'react-redux';
 
 const Comment = ({
   content,
@@ -14,9 +14,8 @@ const Comment = ({
   userId,
   onRemove,
 }) => {
-  const { getUserById } = useUser();
-  const user = getUserById(userId);
-  const { currentUser } = useAuth();
+  const user = useSelector(getUserById(userId));
+  const currentUser = useSelector(getCurrentUserData());
   const { userId: pageOwnerId } = useParams();
 
   const canDelete =

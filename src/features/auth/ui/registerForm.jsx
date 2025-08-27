@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { validatorConfig } from '@shared/lib/errors';
 import { FormComponent } from '@shared/ui/formComponent';
@@ -12,7 +13,7 @@ import { CheckBoxField } from '@shared/ui/checkBoxField';
 import { transformToSelectOptions } from '../model/transformData';
 import { getQualities } from '../../quality';
 import { getProfessions } from '../../profession';
-import { useAuth } from '../model/useAuthContext';
+import { signUp } from '@features/user';
 
 const RegisterForm = ({ toggleFormType }) => {
   const defaultData = {
@@ -25,7 +26,7 @@ const RegisterForm = ({ toggleFormType }) => {
     qualities: [],
     licence: false,
   };
-  const { signUp } = useAuth();
+  const dispatch = useDispatch();
 
   const qualities = useSelector(getQualities());
   const qualitiesList = transformToSelectOptions(qualities);
@@ -39,8 +40,7 @@ const RegisterForm = ({ toggleFormType }) => {
       ...data,
       qualities: selectedQualities,
     };
-
-    await signUp(userPayload);
+    dispatch(signUp(userPayload));
   };
 
   return (

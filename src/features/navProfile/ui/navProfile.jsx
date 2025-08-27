@@ -1,10 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { CustomLink } from '@shared/ui/customLink';
-import { useAuth } from '@features/auth';
+import { useSelector } from 'react-redux';
+import { getCurrentUserData } from '@features/user';
 import '../styles/main.css';
 
 const NavProfile = () => {
-  const { currentUser } = useAuth();
+  const currentUser = useSelector(getCurrentUserData());
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
   const buttonRef = useRef(null);

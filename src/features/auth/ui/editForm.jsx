@@ -12,7 +12,6 @@ import { Loader } from '@shared/ui/loader';
 import { validatorConfig } from '@shared/lib/errors';
 import { getQualities, getQualitiesLoadingStatus } from '../../quality';
 import { getProfessions, getProfessionsLoadingStatus } from '../../profession';
-import { useAuth } from '@features/auth/model/useAuthContext';
 import {
   transformProfessions,
   transformQualities,
@@ -20,11 +19,14 @@ import {
   extractIds,
 } from '../model/transformData';
 import { random } from 'lodash';
+import { useDispatch } from 'react-redux';
+import { getCurrentUserData, updateUser } from '@features/user';
 
 const EditForm = () => {
+  const dispatch = useDispatch();
   const [defaultData, setDefaultData] = useState(null);
   const { userId } = useParams();
-  const { currentUser, updateUserData } = useAuth();
+  const currentUser = useSelector(getCurrentUserData());
   const qualities = useSelector(getQualities());
   const qualitiesLoading = useSelector(getQualitiesLoadingStatus());
   const professions = useSelector(getProfessions());
@@ -68,8 +70,7 @@ const EditForm = () => {
       profession: data.profession,
       qualities: extractIds(data.qualities),
     };
-
-    await updateUserData(updatedUser);
+    dispatch(updateUser(updatedUser));
   };
 
   if (professionLoading || qualitiesLoading || !defaultData) return <Loader />;

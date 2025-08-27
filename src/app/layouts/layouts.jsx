@@ -1,13 +1,14 @@
 import React from 'react';
 import { Outlet, Link } from 'react-router-dom';
-import { useAuth } from '@features/auth';
 import { CustomLink } from '@shared/ui/customLink';
 import { NavProfile } from '@features/navProfile';
+import { useSelector } from 'react-redux';
+import { getCurrentUserData } from '@features/user';
 import Logo from '@assets/home.png';
 import './style/layouts.css';
 
 const Layout = () => {
-  const { currentUser } = useAuth();
+  const currentUser = useSelector(getCurrentUserData());
 
   return (
     <div className="d-flex flex-column min-vh-100">

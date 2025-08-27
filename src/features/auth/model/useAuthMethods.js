@@ -4,7 +4,7 @@ import { setTokens } from '@shared/lib/storage/localStorage';
 import userService from '../../user/api/user.service';
 import { handleFirebaseError } from '@shared/lib/errors';
 import { randomInt } from './randomData';
-import { generateAvatarUrl } from '@features/auth/model/generateAvatarUrl';
+import { generateAvatarUrl } from '@shared/lib/helpers';
 import localStorageService from '@shared/lib/storage/localStorage';
 
 export const useAuthMethods = (setUser, setLoading, navigate) => {
