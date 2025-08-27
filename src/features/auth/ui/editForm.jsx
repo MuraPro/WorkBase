@@ -10,8 +10,8 @@ import { RadioField } from '@shared/ui/radioField';
 import { MultiSelectField } from '@shared/ui/multiSelectField';
 import { Loader } from '@shared/ui/loader';
 import { validatorConfig } from '@shared/lib/errors';
-import { useProfessions } from '@features/profession';
-import { getQualities, getQualitiesLoadingStatus } from '@features/quality';
+import { getQualities, getQualitiesLoadingStatus } from '../../quality';
+import { getProfessions, getProfessionsLoadingStatus } from '../../profession';
 import { useAuth } from '@features/auth/model/useAuthContext';
 import {
   transformProfessions,
@@ -24,16 +24,17 @@ import { random } from 'lodash';
 const EditForm = () => {
   const [defaultData, setDefaultData] = useState(null);
   const { userId } = useParams();
+  const { currentUser, updateUserData } = useAuth();
   const qualities = useSelector(getQualities());
   const qualitiesLoading = useSelector(getQualitiesLoadingStatus());
+  const professions = useSelector(getProfessions());
+  const professionLoading = useSelector(getProfessionsLoadingStatus());
 
-  const { currentUser, updateUserData } = useAuth();
-  const { professions, isLoading: professionsLoading } = useProfessions();
   const professionsList = transformProfessions(professions);
   const qualitiesList = transformQualities(qualities);
 
   useEffect(() => {
-    const isReady = !professionsLoading && !qualitiesLoading;
+    const isReady = !professionLoading && !qualitiesLoading;
     if (isReady) {
       const currentUserQualities = getUserQualities(currentUser, qualities);
       const transformedCurrentUserQualities =
@@ -56,7 +57,7 @@ const EditForm = () => {
     currentUser,
     professions,
     qualities,
-    professionsLoading,
+    professionLoading,
     qualitiesLoading,
     userId,
   ]);
@@ -71,7 +72,7 @@ const EditForm = () => {
     await updateUserData(updatedUser);
   };
 
-  if (professionsLoading || qualitiesLoading || !defaultData) return <Loader />;
+  if (professionLoading || qualitiesLoading || !defaultData) return <Loader />;
 
   return (
     <div className="container mt-5">

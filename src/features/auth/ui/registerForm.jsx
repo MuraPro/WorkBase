@@ -11,7 +11,7 @@ import { MultiSelectField } from '@shared/ui/multiSelectField';
 import { CheckBoxField } from '@shared/ui/checkBoxField';
 import { transformToSelectOptions } from '../model/transformData';
 import { getQualities } from '../../quality';
-import { useProfessions } from '../../profession/model/useProfessionContext';
+import { getProfessions } from '../../profession';
 import { useAuth } from '../model/useAuthContext';
 
 const RegisterForm = ({ toggleFormType }) => {
@@ -26,10 +26,11 @@ const RegisterForm = ({ toggleFormType }) => {
     licence: false,
   };
   const { signUp } = useAuth();
+
   const qualities = useSelector(getQualities());
   const qualitiesList = transformToSelectOptions(qualities);
 
-  const { professions } = useProfessions();
+  const professions = useSelector(getProfessions());
   const professionsList = transformToSelectOptions(professions);
 
   const handleSubmit = async (data) => {

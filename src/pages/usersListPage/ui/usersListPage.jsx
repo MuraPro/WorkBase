@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
+import { useSelector } from 'react-redux';
 import { filterUsers } from '../model/getFilteredUsers';
 import { paginate } from '@shared/lib/helpers';
 import { SearchInput } from '@shared/ui/searchInput';
@@ -10,17 +11,23 @@ import { useUser } from '@features/user';
 import { UserTable } from '@widgets/userTable';
 import _ from 'lodash';
 import { useAuth } from '@features/auth';
-import { useProfessions } from '@features/profession';
+import {
+  getProfessions,
+  getProfessionsLoadingStatus,
+} from '@features/profession';
 
 const UsersListPage = () => {
-  const { users } = useUser();
-  const { currentUser } = useAuth();
-  const { isLoading: professionsLoading, professions } = useProfessions();
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedProf, setSelectedProf] = useState();
   const [sortBy, setSortBy] = useState({ path: 'name', order: 'asc' });
   const [searchQuery, setSearchQuery] = useState('');
   const pageSize = 8;
+
+  const { users } = useUser();
+  const { currentUser } = useAuth();
+
+  const professions = useSelector(getProfessions());
+  const professionsLoading = useSelector(getProfessionsLoadingStatus());
 
   const handleToggleBookMark = (id) => {
     const newArray = users.map((user) => {
