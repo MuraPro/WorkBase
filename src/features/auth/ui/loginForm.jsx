@@ -48,7 +48,7 @@ const LoginForm = ({ toggleFormType }) => {
         <CheckBoxField name="stayOn">Оставаться в системе</CheckBoxField>
 
         <button className="btn btn-primary w-100 mt-3" type="submit">
-          Отправить
+          Войти
         </button>
 
         <div className="my-3 text-center">
