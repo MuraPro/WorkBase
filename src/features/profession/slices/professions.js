@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import professionService from '../api/profession.service';
 import { isOutdated } from '@shared/lib/date';
+import professionService from '../api/profession.service';
 
 const professionsSlice = createSlice({
   name: 'professions',

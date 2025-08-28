@@ -1,9 +1,9 @@
-import { useEffect, useState, useCallback, useMemo } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { generateAvatarUrl } from '@shared/lib/helpers/generateAvatarUrl';
+import httpService from '../api/httpService';
 import professions from './mocks/professions.json';
 import qualities from './mocks/qualities.json';
 import users from './mocks/users.json';
-import httpService from '../api/httpService';
-import { generateAvatarUrl } from '@shared/lib/helpers/generateAvatarUrl';
 
 const useMockData = () => {
   const statusConsts = useMemo(

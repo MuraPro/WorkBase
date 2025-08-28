@@ -1,7 +1,7 @@
-import { createSlice, createSelector } from '@reduxjs/toolkit';
-import qualityService from '../api/quality.service';
+import { createSelector, createSlice } from '@reduxjs/toolkit';
 import { isOutdated } from '@shared/lib/date';
 import { handleFirebaseError } from '@shared/lib/errors';
+import qualityService from '../api/quality.service';
 
 const qualitiesSlice = createSlice({
   name: 'qualities',

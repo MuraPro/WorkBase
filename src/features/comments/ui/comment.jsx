@@ -1,25 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { Avatar } from '@shared/ui/avatar';
 import { displayDate } from '@shared/lib/date';
-import { getUserById } from '@features/user';
-import { getCurrentUserData } from '@features/user';
-import { useSelector } from 'react-redux';
+import { Avatar } from '@shared/ui/avatar';
+import { getCurrentUserId, getUserById } from '@features/user';
+import { removeComment } from '../slices/comments';
 
-const Comment = ({
-  content,
-  created_at: created,
-  _id: id,
-  userId,
-  onRemove,
-}) => {
-  const user = useSelector(getUserById(userId));
-  const currentUser = useSelector(getCurrentUserData());
+const Comment = ({ content, created_at: created, _id: id, userId }) => {
+  const dispatch = useDispatch();
   const { userId: pageOwnerId } = useParams();
+  const user = useSelector(getUserById(userId));
+  const currentUserId = useSelector(getCurrentUserId());
 
-  const canDelete =
-    currentUser._id === userId || currentUser._id === pageOwnerId;
+  const handleSubmit = (id) => {
+    dispatch(removeComment(id));
+  };
+
+  const canDelete = currentUserId === userId || currentUserId === pageOwnerId;
 
   return (
     <div className="bg-light card-body  mb-3">
@@ -38,7 +36,7 @@ const Comment = ({
                   {canDelete && (
                     <button
                       className="btn btn-sm text-primary d-flex align-items-center"
-                      onClick={() => onRemove(id)}
+                      onClick={() => handleSubmit(id)}
                     >
                       <i className="bi bi-x-lg"></i>
                     </button>
@@ -59,7 +57,6 @@ Comment.propTypes = {
   edited_at: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   created_at: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   userId: PropTypes.string,
-  onRemove: PropTypes.func,
   _id: PropTypes.string,
 };
 

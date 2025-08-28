@@ -1,23 +1,22 @@
-import UserProvider from './providers/UsersProvider';
+import userService from './api/user.service';
 import { useUsersMethods } from './model/useUsersMethods';
 import { useUser } from './model/useUsersСontext';
-import userService from './api/user.service';
-import usersReducer from './slices/users';
-import {
+import UserProvider from './providers/UsersProvider';
+import usersReducer, {
+  createUser,
+  getAuthErrors,
+  getCurrentUserData,
+  getCurrentUserId,
+  getDataStatus,
+  getIsLoggedIn,
+  getUserById,
+  getUsersList,
+  getUsersLoadingStatus,
+  loadUsersList,
+  logOut,
   login,
   signUp,
-  logOut,
-  createUser,
-  loadUsersList,
   updateUser,
-  getUsersList,
-  getCurrentUserData,
-  getUserById,
-  getIsLoggedIn,
-  getDataStatus,
-  getUsersLoadingStatus,
-  getCurrentUserId,
-  getAuthErrors,
 } from './slices/users';
 
 export {

@@ -1,8 +1,8 @@
 import React from 'react';
-import { Outlet, Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { Link, Outlet } from 'react-router-dom';
 import { CustomLink } from '@shared/ui/customLink';
 import { NavProfile } from '@features/navProfile';
-import { useSelector } from 'react-redux';
 import { getCurrentUserData } from '@features/user';
 import Logo from '@assets/home.png';
 import './style/layouts.css';

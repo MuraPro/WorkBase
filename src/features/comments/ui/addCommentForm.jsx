@@ -1,21 +1,35 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { validatorConfig } from '@shared/lib/errors';
 import { FormComponent } from '@shared/ui/formComponent';
 import { TextAreaField } from '@shared/ui/textAreaField';
-import { validatorConfig } from '@shared/lib/errors';
+import { createComment } from '../slices/comments';
 
-const AddCommentForm = ({ onSubmit }) => {
-  const handleSubmit = (formData) => {
-    onSubmit(formData);
+const AddCommentForm = () => {
+  const dispatch = useDispatch();
+  const { userId: pageOwnerId } = useParams();
+  const [formKey, setFormKey] = useState(Date.now());
+
+  const handleSubmit = async (formData) => {
+    await dispatch(
+      createComment({
+        content: formData.content,
+        pageId: pageOwnerId,
+      })
+    ).unwrap?.();
+    setFormKey(Date.now());
   };
 
   return (
     <div>
       <h5>Оставить отзыв</h5>
       <FormComponent
+        key={formKey}
         onSubmit={handleSubmit}
         validatorConfig={validatorConfig}
         requiredFields={['userId', 'content']}
+        defaultData={{ content: '' }}
       >
         <TextAreaField name="content" label="" />
         <div className="d-flex justify-content-end">
@@ -26,10 +40,6 @@ const AddCommentForm = ({ onSubmit }) => {
       </FormComponent>
     </div>
   );
-};
-
-AddCommentForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
 };
 
 export default AddCommentForm;

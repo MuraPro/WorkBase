@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { RegisterForm, LoginForm } from '@features/auth';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { LoginForm, RegisterForm } from '@features/auth';
 
 const AuthPage = () => {
   const { type } = useParams();

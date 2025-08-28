@@ -1,10 +1,10 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { nanoid } from 'nanoid';
-import { useParams } from 'react-router-dom';
-import commentService from '../api/comment.service';
-import { handleFirebaseError } from '@shared/lib/errors';
 import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { handleFirebaseError } from '@shared/lib/errors';
 import { getCurrentUserData } from '@features/user';
+import commentService from '../api/comment.service';
 
 export function useCommentsMethods() {
   const { userId } = useParams();

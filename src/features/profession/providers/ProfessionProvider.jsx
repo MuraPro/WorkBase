@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { ProfessionContext } from '../model/useProfessionContext';
 import { Loader } from '@shared/ui/loader';
+import { ProfessionContext } from '../model/useProfessionContext';
 import { useProfessionMethods } from '../model/useProfessionMethods';
 
 const ProfessionProvider = ({ children }) => {

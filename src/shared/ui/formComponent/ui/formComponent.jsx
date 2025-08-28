@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
-import { validator } from '../../../lib/errors/validator';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
+import { validator } from '../../../lib/errors/validator';
 
 const FormComponent = ({
   children,

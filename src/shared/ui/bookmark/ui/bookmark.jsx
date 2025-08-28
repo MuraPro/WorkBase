@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import '../style/bookmark.css';
+
 const BookMark = ({ status, ...rest }) => {
   return (
     <button {...rest} className="bookmark">

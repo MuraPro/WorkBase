@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { BookMark } from '@shared/ui/bookmark';
 import { Table } from '@shared/ui/table';
-import { QualitiesList } from '@features/quality';
 import { Profession } from '@features/profession';
+import { QualitiesList } from '@features/quality';
 
 const UserTable = ({ users, onSort, selectedSort, onToggleBookMark }) => {
   const columns = {

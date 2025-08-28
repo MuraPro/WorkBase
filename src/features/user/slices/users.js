@@ -1,17 +1,18 @@
-import { createAction, createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import userService from '../api/user.service';
-import authService from '../../auth/api/auth.service';
-import { localStorageService } from '@shared/lib/storage';
-import { randomInt } from '@shared/lib/helpers';
-import { generateAvatarUrl } from '@shared/lib/helpers';
+import { createAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { handleFirebaseError } from '@shared/lib/errors';
+import { generateAvatarUrl, randomInt } from '@shared/lib/helpers';
+import { localStorageService } from '@shared/lib/storage';
+import authService from '../../auth/api/auth.service';
+import userService from '../api/user.service';
 
-const initialState = localStorageService.getAccessToken()
+const hasToken = localStorageService.getAccessToken();
+
+const initialState = hasToken
   ? {
       entities: null,
       isLoading: true,
       error: null,
-      auth: { userId: localStorageService.getUserId() },
+      auth: { userId: localStorageService.getUserId() ?? null },
       isLoggedIn: true,
       dataLoaded: false,
     }
@@ -19,7 +20,7 @@ const initialState = localStorageService.getAccessToken()
       entities: null,
       isLoading: false,
       error: null,
-      auth: null,
+      auth: { userId: null },
       isLoggedIn: false,
       dataLoaded: false,
     };
@@ -30,6 +31,7 @@ const usersSlice = createSlice({
   reducers: {
     usersRequested: (state) => {
       state.isLoading = true;
+      state.error = null;
     },
     usersReceived: (state, action) => {
       state.entities = action.payload;
@@ -41,31 +43,26 @@ const usersSlice = createSlice({
       state.isLoading = false;
     },
     authRequestSuccess: (state, action) => {
-      state.auth = action.payload;
-      state.isLoggedIn = true;
+      state.auth = action.payload ?? { userId: null };
+      state.isLoggedIn = Boolean(action.payload?.userId);
     },
     authRequestFailed: (state, action) => {
       state.error = action.payload;
     },
     userCreated: (state, action) => {
-      if (!Array.isArray(state.entities)) {
-        state.entities = [];
-      }
+      if (!Array.isArray(state.entities)) state.entities = [];
       state.entities.push(action.payload);
     },
     userLoggedOut: (state) => {
       state.entities = null;
       state.isLoggedIn = false;
-      state.auth = null;
+      state.auth = { userId: null }; // 👈 безопасно для селекторов
       state.dataLoaded = false;
     },
     userUpdateSuccessed: (state, action) => {
-      state.entities[
-        state.entities.findIndex((u) => u._id === action.payload._id)
-      ] = action.payload;
-    },
-    authRequested: (state) => {
-      state.error = null;
+      if (!Array.isArray(state.entities)) return;
+      const idx = state.entities.findIndex((u) => u._id === action.payload._id);
+      if (idx !== -1) state.entities[idx] = action.payload;
     },
   },
 });
@@ -88,19 +85,22 @@ const createUserFailed = createAction('users/createUserFailed');
 const userUpdateRequested = createAction('users/userUpdateRequested');
 const userUpdateFailed = createAction('users/userUpdateFailed');
 
+/* ========================= THUNKS ========================= */
+
 export const login = createAsyncThunk(
   'users/login',
   async ({ email, password }, { dispatch, rejectWithValue }) => {
     dispatch(authRequested());
     try {
       const data = await authService.login({ email, password });
-      dispatch(authRequestSuccess({ userId: data.localId }));
       localStorageService.setTokens(data);
+      dispatch(authRequestSuccess({ userId: data.localId }));
       return { userId: data.localId };
     } catch (error) {
       handleFirebaseError(error);
-      dispatch(authRequestFailed(error));
-      return rejectWithValue(error);
+      const message = error?.message || String(error);
+      dispatch(authRequestFailed(message));
+      return rejectWithValue(message);
     }
   }
 );
@@ -126,11 +126,14 @@ export const signUp = createAsyncThunk(
         })
       );
 
+      dispatch(authRequestSuccess({ userId: data.localId }));
+
       return data.localId;
     } catch (error) {
       handleFirebaseError(error);
-      dispatch(authRequestFailed(error));
-      return rejectWithValue(error);
+      const message = error?.message || error;
+      dispatch(authRequestFailed(message));
+      return rejectWithValue(message);
     }
   }
 );
@@ -148,7 +151,7 @@ export function createUser(payload) {
       dispatch(userCreated(content));
     } catch (error) {
       handleFirebaseError(error);
-      dispatch(createUserFailed(error.message));
+      dispatch(createUserFailed(error?.message || String(error)));
     }
   };
 }
@@ -160,7 +163,7 @@ export const loadUsersList = () => async (dispatch) => {
     dispatch(usersReceived(content));
   } catch (error) {
     handleFirebaseError(error);
-    dispatch(usersRequestFailed(error.message));
+    dispatch(usersRequestFailed(error?.message || error));
   }
 };
 
@@ -174,30 +177,35 @@ export const updateUser = createAsyncThunk(
       return content;
     } catch (error) {
       handleFirebaseError(error);
-      dispatch(userUpdateFailed(error.message));
-      return rejectWithValue(error.message);
+      const message = error?.message || error;
+      dispatch(userUpdateFailed(message));
+      return rejectWithValue(message);
     }
   }
 );
 
+/* ========================= SELECTORS ========================= */
+
 export const getUsersList = () => (state) => state.users.entities;
 
 export const getCurrentUserData = () => (state) => {
-  return state.users.entities
-    ? state.users.entities.find((u) => u._id === state.users.auth.userId)
-    : null;
+  const userId = state.users.auth?.userId;
+  const list = state.users.entities;
+  if (!userId || !Array.isArray(list)) return null;
+  return list.find((u) => u._id === userId) ?? null;
 };
 
 export const getUserById = (userId) => (state) => {
-  if (state.users.entities) {
-    return state.users.entities.find((u) => u._id === userId);
-  }
+  const list = state.users.entities;
+  if (!Array.isArray(list)) return null;
+  return list.find((u) => u._id === userId) ?? null;
 };
 
 export const getIsLoggedIn = () => (state) => state.users.isLoggedIn;
 export const getDataStatus = () => (state) => state.users.dataLoaded;
 export const getUsersLoadingStatus = () => (state) => state.users.isLoading;
-export const getCurrentUserId = () => (state) => state.users.auth.userId;
+export const getCurrentUserId = () => (state) =>
+  state.users.auth?.userId ?? null;
 export const getAuthErrors = () => (state) => state.users.error;
 
 export default usersReducer;

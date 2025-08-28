@@ -1,8 +1,8 @@
 import React from 'react';
-import { Navigate, Routes, Route } from 'react-router-dom';
-import { UsersListPage } from '@pages/usersListPage';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { UserPage } from '@pages/userPage';
-import { EditPage } from '@app/providers/router/editRoute';
+import { UsersListPage } from '@pages/usersListPage';
+import EditPage from '../editRoute/editRoute';
 
 const UsersRoutes = () => {
   return (

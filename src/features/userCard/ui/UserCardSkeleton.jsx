@@ -1,4 +1,3 @@
-// @features/userCard/UserCardSkeleton.jsx
 import React from 'react';
 import { Skeleton } from '@shared/ui/skeleton';
 

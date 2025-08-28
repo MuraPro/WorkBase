@@ -1,20 +1,25 @@
 import React from 'react';
-import { useParams, Navigate } from 'react-router-dom';
-import { EditUserPage } from '@pages/editUserPage';
 import { useSelector } from 'react-redux';
-import { getCurrentUserData, getUsersLoadingStatus } from '@features/user';
+import { Navigate, useParams } from 'react-router-dom';
+import {
+  getCurrentUserData,
+  getCurrentUserId,
+  getUsersLoadingStatus,
+} from '@features/user';
+import { EditUserPage } from '@pages/editUserPage';
 
 const EditPage = () => {
   const { userId } = useParams();
   const currentUser = useSelector(getCurrentUserData());
+  const currentUserId = useSelector(getCurrentUserId());
   const isLoading = useSelector(getUsersLoadingStatus());
 
   if (isLoading) return null;
 
   if (!currentUser) return <Navigate to="/login" replace />;
 
-  if (currentUser._id !== userId) {
-    return <Navigate to={`/users/${currentUser._id}/edit`} replace />;
+  if (currentUserId !== userId) {
+    return <Navigate to={`/users/${currentUserId}/edit`} replace />;
   }
 
   return <EditUserPage />;

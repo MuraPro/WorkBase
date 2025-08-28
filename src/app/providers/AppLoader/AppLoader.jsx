@@ -1,21 +1,48 @@
 import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadQualitiesList } from '@features/quality';
-import { loadProfessionsList } from '@features/profession';
-import { getIsLoggedIn, loadUsersList } from '@features/user';
+import {
+  getProfessionsLoadingStatus,
+  loadProfessionsList,
+} from '@features/profession';
+import {
+  getQualitiesLoadingStatus,
+  loadQualitiesList,
+} from '@features/quality';
+import {
+  getDataStatus,
+  getIsLoggedIn,
+  getUsersLoadingStatus,
+  loadUsersList,
+} from '@features/user';
+import { useGlobalLoading } from '../LoadingProvider/model/useLoadingProviderContext';
 
 const AppLoader = ({ children }) => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(getIsLoggedIn());
+  const dataLoaded = useSelector(getDataStatus());
+  const usersLoading = useSelector(getUsersLoadingStatus());
+  const qualitiesLoading = useSelector(getQualitiesLoadingStatus());
+  const professionsLoading = useSelector(getProfessionsLoadingStatus());
+
+  const { setShow } = useGlobalLoading();
 
   useEffect(() => {
     dispatch(loadQualitiesList());
     dispatch(loadProfessionsList());
-    if (isLoggedIn) {
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (isLoggedIn && !dataLoaded) {
       dispatch(loadUsersList());
     }
-  }, [dispatch, isLoggedIn]);
+  }, [dispatch, isLoggedIn, dataLoaded]);
+
+  useEffect(() => {
+    const bootLoading = usersLoading || qualitiesLoading || professionsLoading;
+    const t = setTimeout(() => setShow(bootLoading), bootLoading ? 100 : 0);
+    return () => clearTimeout(t);
+  }, [usersLoading, qualitiesLoading, professionsLoading, setShow]);
 
   return children;
 };

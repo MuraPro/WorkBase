@@ -1,17 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { orderBy } from 'lodash';
-import { useComments, CommentsList, AddCommentForm } from '@features/comments';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import {
+  AddCommentForm,
+  CommentsList,
+  getComments,
+  loadCommentsList,
+} from '@features/comments';
 
 const CommentsCard = () => {
-  const { createComment, comments, removeComment } = useComments();
+  const { userId } = useParams();
+  const dispatch = useDispatch();
 
-  const handleSubmit = (data) => {
-    createComment(data);
-  };
+  useEffect(() => {
+    dispatch(loadCommentsList(userId));
+  }, [dispatch, userId]);
 
-  const handleRemoveComment = (id) => {
-    removeComment(id);
-  };
+  const comments = useSelector(getComments());
 
   const sortedComments = orderBy(comments, ['created_at'], ['desc']);
 
@@ -19,7 +25,7 @@ const CommentsCard = () => {
     <>
       <div className="card mb-2">
         <div className="card-body ">
-          <AddCommentForm onSubmit={handleSubmit} />
+          <AddCommentForm />
         </div>
       </div>
 
@@ -28,10 +34,7 @@ const CommentsCard = () => {
           <h5>Отзывы</h5>
           <hr />
           {sortedComments.length > 0 && (
-            <CommentsList
-              comments={sortedComments}
-              onRemove={handleRemoveComment}
-            />
+            <CommentsList comments={sortedComments} />
           )}
         </div>
       </div>

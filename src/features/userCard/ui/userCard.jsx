@@ -1,15 +1,15 @@
 import React from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { Avatar } from '@shared/ui/avatar';
-import UserInfo from './userInfo';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
-import { getCurrentUserData } from '@features/user';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Avatar } from '@shared/ui/avatar';
+import { getCurrentUserId } from '@features/user';
+import UserInfo from './userInfo';
 
 const UserCard = ({ user }) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const currentUser = useSelector(getCurrentUserData());
+  const currentUserId = useSelector(getCurrentUserId());
 
   const handleClick = () => {
     navigate(location.pathname + '/edit');
@@ -18,7 +18,7 @@ const UserCard = ({ user }) => {
   return (
     <div className="card mb-3">
       <div className="card-body position-relative">
-        {currentUser._id === user._id && (
+        {currentUserId === user._id && (
           <button
             className="position-absolute top-0 end-0 btn btn-sm"
             onClick={handleClick}

@@ -1,15 +1,12 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { MeetingsCard } from '@shared/ui/meetingsCard';
-import { UserCard } from '@features/userCard';
-import { QualitiesCard } from '@widgets/qualityCard';
-import { CommentsCard } from '@widgets/commentsCard';
-
-import { CommentsProvider } from '@features/comments';
-import { AboutCard } from '@widgets/aboutCard';
-import { useSelector } from 'react-redux';
-
 import { getUserById } from '@features/user';
+import { UserCard } from '@features/userCard';
+import { AboutCard } from '@widgets/aboutCard';
+import { CommentsCard } from '@widgets/commentsCard';
+import { QualitiesCard } from '@widgets/qualityCard';
 
 const UserPage = () => {
   const { userId } = useParams();
@@ -26,9 +23,7 @@ const UserPage = () => {
           </div>
           <div className="col-md-8">
             <AboutCard text={user.about} />
-            <CommentsProvider>
-              <CommentsCard />
-            </CommentsProvider>
+            <CommentsCard />
           </div>
         </div>
       </div>

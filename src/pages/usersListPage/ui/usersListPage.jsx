@@ -1,23 +1,22 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import { useSelector } from 'react-redux';
-import { filterUsers } from '../model/getFilteredUsers';
-import { paginate } from '@shared/lib/helpers';
-import { SearchInput } from '@shared/ui/searchInput';
-import { Pagination } from '@shared/ui/pagination';
-import { Loader } from '@shared/ui/loader';
-import { SearchStatus } from '@shared/ui/searchStatus';
-import { ProfessionFilters } from '@entities/professionFilter';
-import { getUsersList } from '@features/user';
-import { UserTable } from '@widgets/userTable';
+import React, { useEffect, useMemo, useState } from 'react';
 import _ from 'lodash';
+import { useSelector } from 'react-redux';
+import { paginate } from '@shared/lib/helpers';
+import { Loader } from '@shared/ui/loader';
+import { Pagination } from '@shared/ui/pagination';
+import { SearchInput } from '@shared/ui/searchInput';
+import { SearchStatus } from '@shared/ui/searchStatus';
 import {
   getProfessions,
   getProfessionsLoadingStatus,
 } from '@features/profession';
-import { getCurrentUserData } from '@features/user';
+import { getCurrentUserId, getUsersList } from '@features/user';
+import { ProfessionFilters } from '@entities/professionFilter';
+import { UserTable } from '@widgets/userTable';
+import { filterUsers } from '../model/getFilteredUsers';
 
 const UsersListPage = () => {
-  const currentUser = useSelector(getCurrentUserData());
+  const currentUserId = useSelector(getCurrentUserId());
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedProf, setSelectedProf] = useState();
   const [sortBy, setSortBy] = useState({ path: 'name', order: 'asc' });
@@ -69,9 +68,9 @@ const UsersListPage = () => {
     return filterUsers(users, {
       searchQuery,
       selectedProf,
-      currentUserId: currentUser._id,
+      currentUserId,
     });
-  }, [users, searchQuery, selectedProf, currentUser]);
+  }, [users, searchQuery, selectedProf, currentUserId]);
 
   const count = filteredUsers.length;
 

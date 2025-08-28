@@ -1,13 +1,12 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { validatorConfig } from '@shared/lib/errors';
+import { CheckBoxField } from '@shared/ui/checkBoxField';
 import { FormComponent } from '@shared/ui/formComponent';
 import { TextField } from '@shared/ui/textField';
-import { CheckBoxField } from '@shared/ui/checkBoxField';
-import { validatorConfig } from '@shared/lib/errors';
 import { login } from '@features/user';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 
 const LoginForm = ({ toggleFormType }) => {
   const navigate = useNavigate();

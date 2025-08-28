@@ -1,27 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import { FormComponent } from '@shared/ui/formComponent';
-import { BackHistoryButton } from '@shared/ui/BackHistoryButton';
-import { SelectField } from '@shared/ui/selectField';
-import { TextField } from '@shared/ui/textField';
-import { TextAreaField } from '@shared/ui/textAreaField';
-import { RadioField } from '@shared/ui/radioField';
-import { MultiSelectField } from '@shared/ui/multiSelectField';
-import { Loader } from '@shared/ui/loader';
+import { random } from 'lodash';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
 import { validatorConfig } from '@shared/lib/errors';
-import { getQualities, getQualitiesLoadingStatus } from '../../quality';
+import { BackHistoryButton } from '@shared/ui/BackHistoryButton';
+import { FormComponent } from '@shared/ui/formComponent';
+import { Loader } from '@shared/ui/loader';
+import { MultiSelectField } from '@shared/ui/multiSelectField';
+import { RadioField } from '@shared/ui/radioField';
+import { SelectField } from '@shared/ui/selectField';
+import { TextAreaField } from '@shared/ui/textAreaField';
+import { TextField } from '@shared/ui/textField';
+import { getCurrentUserData, updateUser } from '@features/user';
 import { getProfessions, getProfessionsLoadingStatus } from '../../profession';
+import { getQualities, getQualitiesLoadingStatus } from '../../quality';
 import {
+  extractIds,
+  getUserQualities,
   transformProfessions,
   transformQualities,
-  getUserQualities,
-  extractIds,
 } from '../model/transformData';
-import { random } from 'lodash';
-import { useDispatch } from 'react-redux';
-import { getCurrentUserData, updateUser } from '@features/user';
-import { useNavigate } from 'react-router-dom';
 
 const EditForm = () => {
   const navigate = useNavigate();

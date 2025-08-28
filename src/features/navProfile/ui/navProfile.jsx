@@ -1,6 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { CustomLink } from '@shared/ui/customLink';
+import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { CustomLink } from '@shared/ui/customLink';
 import { getCurrentUserData } from '@features/user';
 import '../styles/main.css';
 

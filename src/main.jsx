@@ -1,14 +1,13 @@
-import './index.css';
+import React from 'react';
+import * as Sentry from '@sentry/react';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React from 'react';
-import { Provider } from 'react-redux';
 import { createRoot } from 'react-dom/client';
+import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import { App } from './app';
 import { logger } from '@shared/lib/logger';
-import * as Sentry from '@sentry/react';
-import { createStore } from './app';
+import { App, createStore } from './app';
+import './index.css';
 
 const store = createStore();
 logger.init();

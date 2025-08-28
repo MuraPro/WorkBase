@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
-import userService from '../api/user.service';
 import { handleFirebaseError } from '@shared/lib/errors';
+import userService from '../api/user.service';
 import { syncCurrentUser } from './syncCurrentUser';
 
 export const useUsersMethods = (currentUser) => {

@@ -1,9 +1,9 @@
 import axios from 'axios';
-import logger from '../logger/logger';
 import { toast } from 'react-toastify';
-import { API_ENDPOINT, IS_FIREBASE } from '../../config/config';
-import { httpAuth } from './httpAuth';
 import { localStorageService } from '@shared/lib/storage';
+import { API_ENDPOINT, IS_FIREBASE } from '../../config/config';
+import logger from '../logger/logger';
+import { httpAuth } from './httpAuth';
 
 const http = axios.create({
   baseURL: API_ENDPOINT,

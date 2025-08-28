@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { useAuthMethods } from '../model/useAuthMethods';
-import { AuthContext } from '../model/useAuthContext';
+import { useNavigate } from 'react-router-dom';
 import { Loader } from '@shared/ui/loader';
+import { AuthContext } from '../model/useAuthContext';
+import { useAuthMethods } from '../model/useAuthMethods';
 
 const AuthProvider = ({ children }) => {
   const [currentUser, setUser] = useState(null);

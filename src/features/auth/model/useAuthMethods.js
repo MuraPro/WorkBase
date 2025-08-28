@@ -1,11 +1,12 @@
-import { useEffect, useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { httpAuth } from '@shared/lib/api';
-import { setTokens } from '@shared/lib/storage/localStorage';
-import userService from '../../user/api/user.service';
 import { handleFirebaseError } from '@shared/lib/errors';
-import { randomInt } from '../../../shared/lib/helpers/randomData';
 import { generateAvatarUrl } from '@shared/lib/helpers';
-import localStorageService from '@shared/lib/storage/localStorage';
+import localStorageService, {
+  setTokens,
+} from '@shared/lib/storage/localStorage';
+import { randomInt } from '../../../shared/lib/helpers/randomData';
+import userService from '../../user/api/user.service';
 
 export const useAuthMethods = (setUser, setLoading, navigate) => {
   async function logIn({ email, password }) {

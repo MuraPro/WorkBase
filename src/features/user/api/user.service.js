@@ -1,5 +1,6 @@
 import httpService from '@shared/lib/api/httpService';
 import { localStorageService } from '@shared/lib/storage';
+
 const userEndpoint = 'user/';
 
 const userService = {

@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { QualityBadge } from '@shared/ui/quality';
 import { useDispatch, useSelector } from 'react-redux';
+import { LoaderWave } from '@shared/ui/loaderWave';
+import { QualityBadge } from '@shared/ui/quality';
 import {
-  getQualitiesLoadingStatus,
   getQualitiesByIds,
+  getQualitiesLoadingStatus,
   loadQualitiesList,
 } from '../slices/qualities';
-import { LoaderWave } from '@shared/ui/loaderWave';
 
 const QualitiesList = ({ qualities }) => {
   const dispatch = useDispatch();

@@ -1,5 +1,5 @@
-import { localStorageService } from '@shared/lib/storage';
 import { httpAuth } from '@shared/lib/api';
+import { localStorageService } from '@shared/lib/storage';
 
 const authService = {
   register: async ({ email, password }) => {

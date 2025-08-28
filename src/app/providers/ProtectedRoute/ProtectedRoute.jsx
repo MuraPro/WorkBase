@@ -1,18 +1,18 @@
 import React from 'react';
-import { Navigate, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
-import { getCurrentUserData } from '@features/user';
+import { Navigate, useLocation } from 'react-router-dom';
+import { getIsLoggedIn } from '@features/user';
 
 const ProtectedRoute = ({ children }) => {
-  const currentUser = useSelector(getCurrentUserData());
+  const isLoggedIn = useSelector(getIsLoggedIn());
   const location = useLocation();
 
-  if (!currentUser) {
-    return <Navigate to="/login" state={{ from: location }} replace />;
-  }
-
-  return children;
+  return isLoggedIn ? (
+    children
+  ) : (
+    <Navigate to="/login" replace state={{ from: location }} />
+  );
 };
 
 ProtectedRoute.propTypes = {

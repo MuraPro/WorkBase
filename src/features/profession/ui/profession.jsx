@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
-import {
-  getProfessionsLoadingStatus,
-  getProfessionById,
-} from '../slices/professions';
 import { LoaderWave } from '@shared/ui/loaderWave';
+import {
+  getProfessionById,
+  getProfessionsLoadingStatus,
+} from '../slices/professions';
 
 const Profession = ({ id }) => {
   const isLoading = useSelector(getProfessionsLoadingStatus());

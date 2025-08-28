@@ -1,21 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
-import { validatorConfig } from '@shared/lib/errors';
-import { FormComponent } from '@shared/ui/formComponent';
-import { SelectField } from '@shared/ui/selectField';
-import { TextField } from '@shared/ui/textField';
-import { TextAreaField } from '@shared/ui/textAreaField';
-import { RadioField } from '@shared/ui/radioField';
-import { MultiSelectField } from '@shared/ui/multiSelectField';
-import { CheckBoxField } from '@shared/ui/checkBoxField';
-import { transformToSelectOptions } from '../model/transformData';
-import { getQualities } from '../../quality';
-import { getProfessions } from '../../profession';
-import { signUp } from '@features/user';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { getAuthErrors } from '../../user';
+import { validatorConfig } from '@shared/lib/errors';
+import { CheckBoxField } from '@shared/ui/checkBoxField';
+import { FormComponent } from '@shared/ui/formComponent';
+import { MultiSelectField } from '@shared/ui/multiSelectField';
+import { RadioField } from '@shared/ui/radioField';
+import { SelectField } from '@shared/ui/selectField';
+import { TextAreaField } from '@shared/ui/textAreaField';
+import { TextField } from '@shared/ui/textField';
+import { signUp } from '@features/user';
+import { getProfessions } from '../../profession';
+import { getQualities } from '../../quality';
+import { transformToSelectOptions } from '../model/transformData';
 
 const RegisterForm = ({ toggleFormType }) => {
   const defaultData = {
@@ -30,9 +28,6 @@ const RegisterForm = ({ toggleFormType }) => {
   };
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const error = useSelector(getAuthErrors());
-  console.log(error);
 
   const qualities = useSelector(getQualities());
   const qualitiesList = transformToSelectOptions(qualities);
