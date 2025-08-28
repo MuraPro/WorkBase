@@ -50,12 +50,18 @@ export function validator(data, config) {
         statusValidate = re.test(String(data || ''));
         break;
       }
+      case 'noCyrillic': {
+        const cyrillicRegExp = /[\u0400-\u04FF]/;
+        statusValidate = cyrillicRegExp.test(String(data || ''));
+        break;
+      }
       default:
         break;
     }
     if (statusValidate) return config.message;
   }
   for (const fieldName in data) {
+    if (!config[fieldName]) continue;
     for (const validateMethod in config[fieldName]) {
       const error = validate(
         validateMethod,

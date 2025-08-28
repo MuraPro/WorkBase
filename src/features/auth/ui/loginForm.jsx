@@ -7,8 +7,10 @@ import { CheckBoxField } from '@shared/ui/checkBoxField';
 import { validatorConfig } from '@shared/lib/errors';
 import { login } from '@features/user';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = ({ toggleFormType }) => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
   const defaultData = {
@@ -19,7 +21,12 @@ const LoginForm = ({ toggleFormType }) => {
 
   const handleSubmit = async (data) => {
     const from = location.state?.from?.pathname || '/';
-    dispatch(login({ payload: data, from }));
+    try {
+      await dispatch(login(data)).unwrap();
+      navigate(from, { replace: true });
+    } catch (error) {
+      console.error('Сведенья для разработчиков: ', error);
+    }
   };
 
   return (

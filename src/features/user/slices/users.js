@@ -1,9 +1,8 @@
-import { createAction, createSlice } from '@reduxjs/toolkit';
-import { useNavigate } from 'react-router-dom';
-import userService from '../services/user.service';
-import authService from '../services/auth.service';
-import localStorageService from '../services/localStorage.service';
-import { randomInt } from './randomData';
+import { createAction, createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import userService from '../api/user.service';
+import authService from '../../auth/api/auth.service';
+import { localStorageService } from '@shared/lib/storage';
+import { randomInt } from '@shared/lib/helpers';
 import { generateAvatarUrl } from '@shared/lib/helpers';
 import { handleFirebaseError } from '@shared/lib/errors';
 
@@ -89,32 +88,30 @@ const createUserFailed = createAction('users/createUserFailed');
 const userUpdateRequested = createAction('users/userUpdateRequested');
 const userUpdateFailed = createAction('users/userUpdateFailed');
 
-export const login =
-  ({ payload, redirect }) =>
-  async (dispatch) => {
-    const { email, password } = payload;
-    const navigate = useNavigate();
+export const login = createAsyncThunk(
+  'users/login',
+  async ({ email, password }, { dispatch, rejectWithValue }) => {
     dispatch(authRequested());
     try {
       const data = await authService.login({ email, password });
       dispatch(authRequestSuccess({ userId: data.localId }));
       localStorageService.setTokens(data);
-      navigate(redirect, { replace: true });
+      return { userId: data.localId };
     } catch (error) {
       handleFirebaseError(error);
-      dispatch(authRequestFailed(error.message));
+      dispatch(authRequestFailed(error));
+      return rejectWithValue(error);
     }
-  };
+  }
+);
 
-export const signUp =
-  ({ email, password, ...rest }) =>
-  async (dispatch) => {
-    const navigate = useNavigate();
-    dispatch(authRequested());
+export const signUp = createAsyncThunk(
+  'users/signUp',
+  async ({ email, password, ...rest }, { dispatch, rejectWithValue }) => {
     try {
       const data = await authService.register({ email, password });
       localStorageService.setTokens(data);
-      dispatch(authRequestSuccess({ userId: data.localId }));
+
       dispatch(
         createUser({
           _id: data.localId,
@@ -128,18 +125,22 @@ export const signUp =
           ...rest,
         })
       );
-      navigate('/users');
+
+      return data.localId;
     } catch (error) {
       handleFirebaseError(error);
-      dispatch(authRequestFailed(error.message));
+      dispatch(authRequestFailed(error));
+      return rejectWithValue(error);
     }
-  };
+  }
+);
+
 export const logOut = () => (dispatch) => {
   localStorageService.removeAuthData();
   dispatch(userLoggedOut());
 };
 
-function createUser(payload) {
+export function createUser(payload) {
   return async function (dispatch) {
     dispatch(userCreateRequested());
     try {
@@ -162,18 +163,22 @@ export const loadUsersList = () => async (dispatch) => {
     dispatch(usersRequestFailed(error.message));
   }
 };
-export const updateUser = (payload) => async (dispatch) => {
-  const navigate = useNavigate();
-  dispatch(userUpdateRequested());
-  try {
-    const { content } = await userService.update(payload);
-    dispatch(userUpdateSuccessed(content));
-    navigate(`/users/${content._id}`);
-  } catch (error) {
-    handleFirebaseError(error);
-    dispatch(userUpdateFailed(error.message));
+
+export const updateUser = createAsyncThunk(
+  'users/updateUser',
+  async (payload, { dispatch, rejectWithValue }) => {
+    dispatch(userUpdateRequested());
+    try {
+      const { content } = await userService.update(payload);
+      dispatch(userUpdateSuccessed(content));
+      return content;
+    } catch (error) {
+      handleFirebaseError(error);
+      dispatch(userUpdateFailed(error.message));
+      return rejectWithValue(error.message);
+    }
   }
-};
+);
 
 export const getUsersList = () => (state) => state.users.entities;
 

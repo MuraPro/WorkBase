@@ -9,6 +9,9 @@ export const validatorConfig = {
     },
   },
   email: {
+    noCyrillic: {
+      message: 'Используйте английские буквы для ввода',
+    },
     isRequired: {
       message: 'Электронная почта обязательна для заполнения',
     },
@@ -17,6 +20,9 @@ export const validatorConfig = {
     },
   },
   password: {
+    noCyrillic: {
+      message: 'Используйте английские буквы для ввода',
+    },
     isRequired: {
       message: 'Пароль обязателен для заполнения',
     },

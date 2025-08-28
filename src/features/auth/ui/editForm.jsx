@@ -21,8 +21,10 @@ import {
 import { random } from 'lodash';
 import { useDispatch } from 'react-redux';
 import { getCurrentUserData, updateUser } from '@features/user';
+import { useNavigate } from 'react-router-dom';
 
 const EditForm = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [defaultData, setDefaultData] = useState(null);
   const { userId } = useParams();
@@ -70,7 +72,12 @@ const EditForm = () => {
       profession: data.profession,
       qualities: extractIds(data.qualities),
     };
-    dispatch(updateUser(updatedUser));
+    try {
+      await dispatch(updateUser(updatedUser)).unwrap();
+      navigate(`/users/${userId}`);
+    } catch (error) {
+      console.error('Сведенья для разработчиков: ', error);
+    }
   };
 
   if (professionLoading || qualitiesLoading || !defaultData) return <Loader />;

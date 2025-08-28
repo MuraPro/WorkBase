@@ -14,6 +14,8 @@ import { transformToSelectOptions } from '../model/transformData';
 import { getQualities } from '../../quality';
 import { getProfessions } from '../../profession';
 import { signUp } from '@features/user';
+import { useNavigate } from 'react-router-dom';
+import { getAuthErrors } from '../../user';
 
 const RegisterForm = ({ toggleFormType }) => {
   const defaultData = {
@@ -27,6 +29,10 @@ const RegisterForm = ({ toggleFormType }) => {
     licence: false,
   };
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const error = useSelector(getAuthErrors());
+  console.log(error);
 
   const qualities = useSelector(getQualities());
   const qualitiesList = transformToSelectOptions(qualities);
@@ -40,7 +46,13 @@ const RegisterForm = ({ toggleFormType }) => {
       ...data,
       qualities: selectedQualities,
     };
-    dispatch(signUp(userPayload));
+
+    try {
+      await dispatch(signUp(userPayload)).unwrap();
+      navigate('/users');
+    } catch (error) {
+      console.error('Сведенья для разработчиков: ', error);
+    }
   };
 
   return (
