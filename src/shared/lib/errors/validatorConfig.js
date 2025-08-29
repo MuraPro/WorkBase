@@ -38,9 +38,6 @@ export const validatorConfig = {
     },
   },
   about: {
-    isRequired: {
-      message: 'Поле обязательно для заполнения',
-    },
     minIfNotEmpty: {
       message: 'Минимум 20 символов, если заполняете это поле',
       value: 20,

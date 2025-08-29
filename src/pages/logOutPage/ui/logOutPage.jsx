@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Loader } from '@shared/ui/loader';
-import { logOut } from '@features/user';
+import { logOut } from '@entities/user';
 
 const LogOutPage = () => {
   const navigate = useNavigate();

@@ -1,0 +1,42 @@
+import authService from './api/auth.service';
+import userService from './api/user.service';
+import usersReducer, {
+  createUser,
+  getAuthErrors,
+  getCurrentUserData,
+  getCurrentUserId,
+  getDataStatus,
+  getIsLoggedIn,
+  getUserById,
+  getUsersList,
+  getUsersLoadingStatus,
+  hasUserLiked,
+  loadUsersList,
+  logOut,
+  login,
+  signUp,
+  toggleLike,
+  updateUser,
+} from './slices/users';
+
+export {
+  toggleLike,
+  hasUserLiked,
+  userService,
+  authService,
+  usersReducer,
+  login,
+  signUp,
+  logOut,
+  createUser,
+  loadUsersList,
+  updateUser,
+  getUsersList,
+  getCurrentUserData,
+  getUserById,
+  getIsLoggedIn,
+  getDataStatus,
+  getUsersLoadingStatus,
+  getCurrentUserId,
+  getAuthErrors,
+};

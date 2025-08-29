@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { CustomLink } from '@shared/ui/customLink';
-import { getCurrentUserData } from '@features/user';
+import { getCurrentUserData } from '@entities/user';
 import '../styles/main.css';
 
 const NavProfile = () => {

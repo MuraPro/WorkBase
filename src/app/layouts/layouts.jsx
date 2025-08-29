@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Link, Outlet } from 'react-router-dom';
 import { CustomLink } from '@shared/ui/customLink';
 import { NavProfile } from '@features/navProfile';
-import { getCurrentUserData } from '@features/user';
+import { getCurrentUserData } from '@entities/user';
 import Logo from '@assets/home.png';
 import './style/layouts.css';
 

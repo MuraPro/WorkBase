@@ -2,7 +2,7 @@
 import { createAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { nanoid } from 'nanoid';
 import { handleFirebaseError } from '@shared/lib/errors';
-import { getCurrentUserId } from '../../user';
+import { getCurrentUserId } from '@entities/user';
 import commentService from '../api/comment.service';
 
 const initialState = {

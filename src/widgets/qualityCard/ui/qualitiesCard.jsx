@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { QualitiesList } from '@features/quality';
+import { QualitiesList } from '@entities/quality';
 
 const QualitiesCard = ({ data }) => {
   return (

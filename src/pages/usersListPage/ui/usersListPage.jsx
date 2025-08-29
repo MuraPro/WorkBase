@@ -9,9 +9,9 @@ import { SearchStatus } from '@shared/ui/searchStatus';
 import {
   getProfessions,
   getProfessionsLoadingStatus,
-} from '@features/profession';
-import { getCurrentUserId, getUsersList } from '@features/user';
+} from '@entities/profession';
 import { ProfessionFilters } from '@entities/professionFilter';
+import { getCurrentUserId, getUsersList } from '@entities/user';
 import { UserTable } from '@widgets/userTable';
 import { filterUsers } from '../model/getFilteredUsers';
 

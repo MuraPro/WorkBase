@@ -5,7 +5,7 @@ import {
   getCurrentUserData,
   getCurrentUserId,
   getUsersLoadingStatus,
-} from '@features/user';
+} from '@entities/user';
 import { EditUserPage } from '@pages/editUserPage';
 
 const EditPage = () => {

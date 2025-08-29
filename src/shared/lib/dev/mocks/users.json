@@ -12,7 +12,9 @@
     ],
     "about": "",
     "completedMeetings": 36,
-    "rate": 2.5
+    "rate": 2.5,
+    "like": 0,
+    "likedBy": []
   },
   {
     "_id": "67rdca3eeb7f6fgeed471816",
@@ -27,7 +29,10 @@
     ],
     "about": "",
     "completedMeetings": 15,
-    "rate": 2.5
+    "rate": 2.5,
+    "bookmark": false,
+    "like": 0,
+    "likedBy": []
   },
   {
     "_id": "67rdca3eeb7f6fgeed471817",
@@ -39,7 +44,9 @@
     "about": "",
     "completedMeetings": 247,
     "rate": 3.5,
-    "bookmark": false
+    "bookmark": false,
+    "like": 0,
+    "likedBy": []
   },
   {
     "_id": "67rdca3eeb7f6fgeed471818",
@@ -51,7 +58,9 @@
     "about": "",
     "completedMeetings": 148,
     "rate": 3.5,
-    "bookmark": false
+    "bookmark": false,
+    "like": 0,
+    "likedBy": []
   },
   {
     "_id": "67rdca3eeb7f6fgeed471819",
@@ -66,7 +75,10 @@
     ],
     "about": "",
     "completedMeetings": 37,
-    "rate": 4.6
+    "rate": 4.6,
+    "bookmark": false,
+    "like": 0,
+    "likedBy": []
   },
   {
     "_id": "67rdca3eeb7f6fgeed471820",
@@ -82,7 +94,9 @@
     "about": "",
     "completedMeetings": 147,
     "rate": 3.5,
-    "bookmark": false
+    "bookmark": false,
+    "like": 0,
+    "likedBy": []
   },
   {
     "_id": "67rdca3eeb7f6fgeed471821",
@@ -94,7 +108,9 @@
     "about": "",
     "completedMeetings": 72,
     "rate": 3.5,
-    "bookmark": false
+    "bookmark": false,
+    "like": 0,
+    "likedBy": []
   },
   {
     "_id": "67rdca3eeb7f6fgeed471822",
@@ -105,7 +121,10 @@
     "qualities": ["67rdca3eeb7f6fgeed471105", "67rdca3eeb7f6fgeed471106"],
     "about": "",
     "completedMeetings": 72,
-    "rate": 5
+    "rate": 5,
+    "bookmark": false,
+    "like": 0,
+    "likedBy": []
   },
   {
     "_id": "67rdca3eeb7f6fgeed471823",
@@ -120,7 +139,10 @@
     ],
     "about": "",
     "completedMeetings": 17,
-    "rate": 4.5
+    "rate": 4.5,
+    "bookmark": false,
+    "like": 0,
+    "likedBy": []
   },
   {
     "_id": "67rdca3eeb7f6fgeed471824",
@@ -135,7 +157,10 @@
     ],
     "about": "",
     "completedMeetings": 17,
-    "rate": 4.5
+    "rate": 4.5,
+    "bookmark": false,
+    "like": 0,
+    "likedBy": []
   },
   {
     "_id": "67rdca3eeb7f6fgeed47181f",
@@ -150,7 +175,10 @@
     ],
     "about": "",
     "completedMeetings": 434,
-    "rate": 3.5
+    "rate": 3.5,
+    "bookmark": false,
+    "like": 0,
+    "likedBy": []
   },
   {
     "_id": "67rdca3eeb7f6fgeed47181r",
@@ -165,6 +193,9 @@
     ],
     "about": "",
     "completedMeetings": 434,
-    "rate": 5
+    "rate": 5,
+    "bookmark": false,
+    "like": 0,
+    "likedBy": []
   }
 ]

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { displayDate } from '@shared/lib/date';
 import { Avatar } from '@shared/ui/avatar';
-import { getCurrentUserId, getUserById } from '@features/user';
+import { getCurrentUserId, getUserById } from '@entities/user';
 import { removeComment } from '../slices/comments';
 
 const Comment = ({ content, created_at: created, _id: id, userId }) => {

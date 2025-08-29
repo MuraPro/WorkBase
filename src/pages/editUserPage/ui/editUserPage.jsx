@@ -1,5 +1,5 @@
 import React from 'react';
-import { EditForm } from '@features/auth';
+import { EditForm } from '@features/authForm';
 
 const EditUserPage = () => {
   return (

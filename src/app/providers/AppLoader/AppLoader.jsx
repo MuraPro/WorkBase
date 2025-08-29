@@ -4,17 +4,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   getProfessionsLoadingStatus,
   loadProfessionsList,
-} from '@features/profession';
+} from '@entities/profession';
 import {
   getQualitiesLoadingStatus,
   loadQualitiesList,
-} from '@features/quality';
+} from '@entities/quality';
 import {
   getDataStatus,
   getIsLoggedIn,
   getUsersLoadingStatus,
   loadUsersList,
-} from '@features/user';
+} from '@entities/user';
 import { useGlobalLoading } from '../LoadingProvider/model/useLoadingProviderContext';
 
 const AppLoader = ({ children }) => {
