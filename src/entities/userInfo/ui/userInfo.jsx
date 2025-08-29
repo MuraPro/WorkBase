@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Profession from '../../profession';
+import { Profession } from '../../profession';
 import '../style/user.css';
 
 const UserInfo = ({ name, professionId, like = 0, onLike }) => {

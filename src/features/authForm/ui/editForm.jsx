@@ -15,8 +15,8 @@ import {
   getProfessions,
   getProfessionsLoadingStatus,
 } from '@entities/profession';
+import { getQualities, getQualitiesLoadingStatus } from '@entities/quality';
 import { getCurrentUserData, updateUser } from '@entities/user';
-import { getQualities, getQualitiesLoadingStatus } from '../../quality';
 import {
   extractIds,
   getUserQualities,

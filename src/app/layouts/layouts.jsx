@@ -36,7 +36,7 @@ const Layout = () => {
               {currentUser && (
                 <li className="nav-item ms-3 ms-sm-5">
                   <CustomLink to="/users" className="nav-link px-2 text-dark">
-                    Кандидаты
+                    Анкеты
                   </CustomLink>
                 </li>
               )}
@@ -54,9 +54,7 @@ const Layout = () => {
         </div>
       </header>
 
-      <main className="container flex-grow-1 my-2 main-wrap">
-        <Outlet />
-      </main>
+      <Outlet />
 
       <footer className="bg-white text-center py-4 mt-auto border-top shadow-sm site-footer">
         <div className="container">

@@ -11,8 +11,8 @@ import { SelectField } from '@shared/ui/selectField';
 import { TextAreaField } from '@shared/ui/textAreaField';
 import { TextField } from '@shared/ui/textField';
 import { getProfessions } from '@entities/profession';
+import { getQualities } from '@entities/quality';
 import { signUp } from '@entities/user';
-import { getQualities } from '../../quality';
 import { transformToSelectOptions } from '../model/transformData';
 
 const RegisterForm = ({ toggleFormType }) => {
