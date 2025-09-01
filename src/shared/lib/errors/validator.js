@@ -55,6 +55,15 @@ export function validator(data, config) {
         statusValidate = cyrillicRegExp.test(String(data || ''));
         break;
       }
+      case 'isImageUrl': {
+        if (data && typeof data === 'string' && data.trim() !== '') {
+          const urlRegExp = /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|webp|svg))$/i;
+          statusValidate = !urlRegExp.test(data.trim());
+        } else {
+          statusValidate = false;
+        }
+        break;
+      }
       default:
         break;
     }

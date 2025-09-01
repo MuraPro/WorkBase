@@ -4,7 +4,6 @@ import '../styles/avatar.css';
 
 const Avatar = ({ size, url }) => {
   const [loaded, setLoaded] = useState(false);
-
   return (
     <div
       className="avatar-wrapper position-relative"
@@ -18,7 +17,6 @@ const Avatar = ({ size, url }) => {
           <div className="spinner-border text-secondary" role="status" />
         </div>
       )}
-
       <img
         src={url}
         width={size}
@@ -32,14 +30,11 @@ const Avatar = ({ size, url }) => {
     </div>
   );
 };
-
 Avatar.propTypes = {
-  url: PropTypes.string.isRequired,
+  url: PropTypes.string,
   size: PropTypes.number,
 };
-
 Avatar.defaultProps = {
   size: 100,
 };
-
 export default Avatar;

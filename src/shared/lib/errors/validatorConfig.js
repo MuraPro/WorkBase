@@ -65,6 +65,12 @@ export const validatorConfig = {
       message: 'Требуется подтверждение лицензионного соглашения',
     },
   },
+  image: {
+    isImageUrl: {
+      message:
+        'Введите корректную ссылку на картинку (jpg, png, gif, webp, svg)',
+    },
+  },
   userId: {
     isRequired: {
       message: 'Выберите от чьего имени вы хотите отправить сообщение',

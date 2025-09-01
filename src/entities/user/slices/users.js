@@ -166,7 +166,10 @@ export const login = createAsyncThunk(
 
 export const signUp = createAsyncThunk(
   'users/signUp',
-  async ({ email, password, ...rest }, { dispatch, rejectWithValue }) => {
+  async (
+    { email, password, image, ...rest },
+    { dispatch, rejectWithValue }
+  ) => {
     try {
       const data = await authService.register({ email, password });
       localStorageService.setTokens(data);
@@ -178,9 +181,11 @@ export const signUp = createAsyncThunk(
           rate: randomInt(1, 5),
           bookmark: false,
           completedMeetings: randomInt(0, 100),
-          image: generateAvatarUrl(
-            `${(Math.random() + 1).toString(36).substring(7)}`
-          ),
+          image:
+            image ||
+            generateAvatarUrl(
+              `${(Math.random() + 1).toString(36).substring(7)}`
+            ),
           ...rest,
         })
       );

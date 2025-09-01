@@ -55,9 +55,9 @@ const UserCard = ({ user }) => {
 UserCard.propTypes = {
   user: PropTypes.shape({
     _id: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
+    image: PropTypes.string,
     name: PropTypes.string.isRequired,
-    like: PropTypes.number.isRequired,
+    like: PropTypes.number,
     profession: PropTypes.string.isRequired,
   }).isRequired,
 };
