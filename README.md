@@ -1,6 +1,6 @@
 # React Vite App – Hooks & Redux Toolkit Version
 
-Визуальная часть проекта [![Vercel Status](https://vercelbadge.vercel.app/api/murapros-projects/work-base)](https://work-base.vercel.app)
+Визуальная часть проекта [![Vercel Status](https://img.shields.io/github/deployments/MuraPro/WorkBase/Production?label=vercel&logo=vercel&branch=redux-toolkit)] (https://work-base.vercel.app)
 
 Это учебный/пет-проект, созданный для демонстрации навыков фронтенд-разработки.
 Приложение написано на React с использованием сборщика Vite. В проекте реализованы две версии состояния:
