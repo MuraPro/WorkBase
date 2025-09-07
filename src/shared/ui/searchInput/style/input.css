@@ -1,0 +1,5 @@
+@media (max-width: 767px) {
+  .w-70-sm {
+    width: 70% !important;
+  }
+}

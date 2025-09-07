@@ -39,3 +39,9 @@
   border-top: 1px solid #eee;
   width: 100%;
 }
+
+@media (max-width: 575.98px) {
+  .p-xs-3 {
+    padding: 1rem !important; /* 1rem = Bootstrap p-3 */
+  }
+}

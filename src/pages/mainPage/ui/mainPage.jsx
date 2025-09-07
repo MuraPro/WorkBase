@@ -4,8 +4,8 @@ import '../style/main.css';
 
 export const MainPage = () => {
   return (
-    <main className="main-page w-100">
-      <div className="main-header text-center py-5 text-white">
+    <main className="main-page w-100 ">
+      <div className="main-header text-center py-5 text-white p-xs-3">
         <h1 className="fw-bold display-3">Online-Анкеты</h1>
         <p className="lead fs-4">
           Размести свою анкету — и заказчики найдут тебя!

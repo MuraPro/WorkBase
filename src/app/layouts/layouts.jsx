@@ -57,7 +57,7 @@ const Layout = () => {
       <Outlet />
 
       <footer className="bg-white text-center py-4 mt-auto border-top shadow-sm site-footer">
-        <div className="container">
+        <div className="">
           <p className="mb-0 text-muted small">
             © 2025 MuraPro. All rights reserved.
           </p>

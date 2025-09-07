@@ -21,7 +21,7 @@ const AuthPage = () => {
   }, [type]);
 
   return (
-    <div className="container d-flex justify-content-center mt-1">
+    <div className="container d-flex justify-content-center mt-3 mb-3">
       {formType === 'register' ? (
         <RegisterForm toggleFormType={toggleFormType} />
       ) : (

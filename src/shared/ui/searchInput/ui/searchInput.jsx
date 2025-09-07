@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import '../style/input.css';
 
 const SearchInput = ({ value, onChange }) => (
   <input
@@ -8,7 +9,7 @@ const SearchInput = ({ value, onChange }) => (
     placeholder="Search..."
     value={value}
     onChange={onChange}
-    className="form-control my-3 w-50 ms-3"
+    className="form-control my-3 w-50 w-70-sm ms-3"
   />
 );
 

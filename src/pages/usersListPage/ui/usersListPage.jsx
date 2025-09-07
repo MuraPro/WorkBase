@@ -14,6 +14,7 @@ import { ProfessionFilters } from '@entities/professionFilter';
 import { getCurrentUserId, getUsersList } from '@entities/user';
 import { UserTable } from '@widgets/userTable';
 import { filterUsers } from '../model/getFilteredUsers';
+import '../style/usersList.css';
 
 const UsersListPage = () => {
   const currentUserId = useSelector(getCurrentUserId());
@@ -85,13 +86,13 @@ const UsersListPage = () => {
   }
 
   return (
-    <div className="container d-flex p-1 flex-column">
-      <div className="d-flex align-items-center justify-content-between">
+    <div className="container d-flex p-1 p-xs-3 flex-column">
+      <div className="d-flex align-items-center justify-content-between p-xs-3">
         <SearchInput onChange={handleSearchQuery} value={searchQuery} />
         <SearchStatus length={count} />
       </div>
 
-      <div className="d-flex w-100 gap-3 flex-grow-1">
+      <div className="d-flex flex-md-row flex-column w-100 gap-3 flex-grow-1">
         <ProfessionFilters
           selectedProf={selectedProf}
           professions={professions}
@@ -109,6 +110,7 @@ const UsersListPage = () => {
           </div>
         )}
       </div>
+
       {count > 0 && (
         <div className="d-flex flex-column align-items-center flex-grow-1">
           <Pagination
