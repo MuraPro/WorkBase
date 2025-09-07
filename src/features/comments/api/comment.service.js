@@ -1,7 +1,6 @@
 import { httpService } from '@shared/lib/api';
 
 const commentEndpoint = 'comment/';
-
 const commentService = {
   createComment: async (payload) => {
     const { data } = await httpService.put(

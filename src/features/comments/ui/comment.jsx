@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -13,6 +13,15 @@ const Comment = ({ content, created_at: created, _id: id, userId }) => {
   const user = useSelector(getUserById(userId));
   const currentUserId = useSelector(getCurrentUserId());
 
+  const [_, setNow] = useState(Date.now());
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setNow(Date.now());
+    }, 60000); // обновлять каждую минуту
+    return () => clearInterval(interval);
+  }, []);
+
   const handleSubmit = (id) => {
     dispatch(removeComment(id));
   };
@@ -20,7 +29,7 @@ const Comment = ({ content, created_at: created, _id: id, userId }) => {
   const canDelete = currentUserId === userId || currentUserId === pageOwnerId;
 
   return (
-    <div className="bg-light card-body  mb-3">
+    <div className="bg-light card-body mb-3 rounded-3">
       <div className="row">
         <div className="col">
           <div className="d-flex flex-start" style={{ columnGap: '20px' }}>
@@ -28,7 +37,7 @@ const Comment = ({ content, created_at: created, _id: id, userId }) => {
             <div className="flex-grow-1 flex-shrink-1">
               <div className="mb-4">
                 <div className="d-flex justify-content-between align-items-center">
-                  <p className="mb-1 ">
+                  <p className="mb-1">
                     {user && user.name}{' '}
                     <span className="small">- {displayDate(created)}</span>
                   </p>

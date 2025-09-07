@@ -11,13 +11,13 @@ const AddCommentForm = () => {
   const { userId: pageOwnerId } = useParams();
   const [formKey, setFormKey] = useState(Date.now());
 
-  const handleSubmit = async (formData) => {
-    await dispatch(
+  const handleSubmit = (formData) => {
+    dispatch(
       createComment({
         content: formData.content,
         pageId: pageOwnerId,
       })
-    ).unwrap?.();
+    );
     setFormKey(Date.now());
   };
 
@@ -28,11 +28,11 @@ const AddCommentForm = () => {
         key={formKey}
         onSubmit={handleSubmit}
         validatorConfig={validatorConfig}
-        requiredFields={['userId', 'content']}
+        requiredFields={['content']}
         defaultData={{ content: '' }}
       >
-        <TextAreaField name="content" label="" />
-        <div className="d-flex justify-content-end">
+        <TextAreaField name="content" label="Ваш комментарий" />
+        <div className="d-flex justify-content-end mt-2">
           <button type="submit" className="btn btn-primary">
             Опубликовать
           </button>

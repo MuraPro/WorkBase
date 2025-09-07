@@ -1,4 +1,3 @@
-// features/comments/model/comments.slice.ts
 import { createAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { nanoid } from 'nanoid';
 import { handleFirebaseError } from '@shared/lib/errors';
@@ -47,7 +46,6 @@ const {
   commentRemoved,
 } = actions;
 
-// дополнительные "requested" action'ы (как в usersSlice)
 const addCommentRequested = createAction('comments/addCommentRequested');
 const removeCommentRequested = createAction('comments/removeCommentRequested');
 
@@ -71,29 +69,23 @@ export const loadCommentsList = createAsyncThunk(
   }
 );
 
-// Создание комментария
-export const createComment = createAsyncThunk(
-  'comments/createComment',
-  async (payload, { dispatch, getState, rejectWithValue }) => {
-    dispatch(addCommentRequested(payload));
-    try {
-      const comment = {
-        ...payload,
-        _id: nanoid(),
-        created_at: Date.now(),
-        userId: getCurrentUserId()(getState()),
-      };
-      const { content } = await commentService.createComment(comment);
-      dispatch(commentCreated(content));
-      return content;
-    } catch (error) {
-      handleFirebaseError(error);
-      const message = error?.message ?? 'Failed to create comment';
-      dispatch(commentsRequestFailed(message));
-      return rejectWithValue(message);
-    }
+export const createComment = (payload) => async (dispatch, getState) => {
+  dispatch(addCommentRequested(payload));
+  try {
+    const comment = {
+      ...payload,
+      _id: nanoid(),
+      created_at: Date.now(),
+      userId: getCurrentUserId()(getState()),
+      pageId: payload.pageId,
+    };
+
+    const { content } = await commentService.createComment(comment);
+    dispatch(commentCreated(content));
+  } catch (error) {
+    dispatch(commentsRequestFailed(error.message));
   }
-);
+};
 
 // Удаление комментария
 export const removeComment = createAsyncThunk(
@@ -102,9 +94,14 @@ export const removeComment = createAsyncThunk(
     dispatch(removeCommentRequested());
     try {
       const { content } = await commentService.removeComment(commentId);
-      if (content === null) {
+      if (
+        content === null ||
+        (Array.isArray(content) && content.length === 0) ||
+        Object.keys(content).length === 0
+      ) {
         dispatch(commentRemoved(commentId));
       }
+
       return commentId;
     } catch (error) {
       handleFirebaseError(error);
